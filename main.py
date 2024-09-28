@@ -12,7 +12,7 @@ print('Welcome to KapsalonsForGas. \nHere you can calculate how many kapsalons y
 # wallet_address = input("What is your Ethereum wallet address?")
 
 def get_transactions(etherscan_api_key, wallet_address):
-    url = 'https://api.etherscan.io/api?module=account&action=txlist&address=' + wallet_address + '&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=' + etherscan_api_key
+    url = 'https://api.etherscan.io/api?module=account&action=txlist&address=' + wallet_address + '&startblock=0&endblock=99999999&page=1&offset=10000&sort=asc&apikey=' + etherscan_api_key
     response = requests.get(url)
     data = response.json()
 
@@ -28,7 +28,6 @@ def get_total_fees_in_eth():
     total_gas_in_wei = 0
 
     for transaction in transactions:
-       print(transaction)
        gas_in_wei = int(transaction['gasUsed']) * int(transaction['gasPrice'])
        total_gas_in_wei = gas_in_wei + total_gas_in_wei
 
