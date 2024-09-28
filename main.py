@@ -5,7 +5,7 @@ import requests
 load_dotenv()
 
 ETHERSCAN_API_KEY = os.getenv('ETHERSCAN_API_KEY')
-wallet_address = '0xC8F3A121d068d85d91c5CEE5e714ce5892BCb7BC'
+wallet_address = '0x6a4a3b12E1ccD0DF693014b78702e866Cd3b0EE1'
 PRICE_KAPSALON = 14
 
 print('Welcome to KapsalonsForGas. \nHere you can calculate how many kapsalons you couldve bought with your wasted gas fees')
@@ -23,7 +23,27 @@ def get_transactions(etherscan_api_key, wallet_address):
         print('Error')
 
 
+def get_total_fees_in_eth():
+    transactions = get_transactions(ETHERSCAN_API_KEY,wallet_address)
+    total_gas_in_wei = 0
 
-get_transactions(ETHERSCAN_API_KEY,wallet_address)
+    for transaction in transactions:
+       print(transaction)
+       gas_in_wei = int(transaction['gasUsed']) * int(transaction['gasPrice'])
+       total_gas_in_wei = gas_in_wei + total_gas_in_wei
+
+    print(len(transactions))
+
+    total_gas_in_eth = total_gas_in_wei / (10**18)
+    return total_gas_in_eth
+
+print(get_total_fees_in_eth())
+
+
+
+
+
+
+
 
 
